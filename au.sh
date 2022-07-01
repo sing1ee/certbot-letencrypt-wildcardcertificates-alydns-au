@@ -7,7 +7,7 @@
 #PHP 命令行路径，如果有需要可以修改
 phpcmd="/usr/bin/php"
 #Python 命令行路径，如果有需要可以修改
-pythoncmd="/usr/bin/python"
+pythoncmd="/usr/bin/python3"
 
 #填写阿里云的AccessKey ID及AccessKey Secret
 #如何申请见https://help.aliyun.com/knowledge_detail/38738.html
@@ -68,7 +68,7 @@ case $plang in
 		key=$HWY_KEY
 		token=$HWY_TOKEN
     exit 
-  elif [[ "$pdns" == "godaddy" ]] ;then 
+	elif [[ "$pdns" == "godaddy" ]] ;then 
 		dnsapi="$PATH/php-version/godaddydns.php"
 		key=$GODADDY_KEY
 		token=$GODADDY_TOKEN
@@ -89,7 +89,7 @@ case $plang in
 		dnsapi=$PATH"/python-version/txydns.py"
 		key=$TXY_KEY
 		token=$TXY_TOKEN
-  elif [[ "$pdns" == "txy" ]]; then
+	elif [[ "$pdns" == "txy" ]]; then
 		dnsapi=$PATH"/python-version/txydns.py"
 		key=$TXY_KEY
 		token=$TXY_TOKEN
@@ -106,10 +106,10 @@ case $plang in
 		exit
 	fi
 	;;
-  
+
 esac
 
-$cmd $dnsapi $paction $CERTBOT_DOMAIN "_acme-challenge" $CERTBOT_VALIDATION $key $token >>"/var/log/certd.log"
+$cmd $dnsapi $paction $CERTBOT_DOMAIN "_acme-challenge" $CERTBOT_VALIDATION $key $token >>"$HOME/certd.log"
 
 if [[ "$paction" == "add" ]]; then
         # DNS TXT 记录刷新时间
